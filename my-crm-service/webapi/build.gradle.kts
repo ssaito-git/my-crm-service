@@ -1,9 +1,9 @@
 plugins {
     kotlin("jvm")
-    kotlin("plugin.spring") version "1.9.22"
-    id("org.springframework.boot") version "3.2.1"
-    id("io.spring.dependency-management") version "1.1.3"
-    id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
+    alias(libs.plugins.spring)
+    alias(libs.plugins.springframework.boot)
+    alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.openapi.gradle.plugin)
     `mycrmservice-detekt`
 }
 
@@ -15,23 +15,26 @@ dependencies {
     implementation(project(":my-crm-service:core"))
     implementation(project(":my-crm-service:data"))
 
-    // spring boot
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-    implementation("org.springframework.boot:spring-boot-starter-aop")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    runtimeOnly("com.nimbusds:oauth2-oidc-sdk:10.9.1")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    // Spring Boot
+    implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.boot.starter.oauth2.resource.server)
+    implementation(libs.spring.boot.starter.aop)
+    implementation(libs.spring.boot.starter.validation)
+    implementation(libs.spring.boot.starter.jdbc)
+    developmentOnly(libs.spring.boot.devtools)
+    testImplementation(libs.spring.boot.starter.test)
 
-    // jooq
-    implementation("org.jooq:jooq:3.19.3")
+    // Jackson
+    implementation(libs.jackson.module.kotlin)
 
-    // open api
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.3.0")
+    // Nimbus
+    runtimeOnly(libs.oauth2.oidc.sdk)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // jOOQ
+    implementation(libs.jooq)
+
+    // Springdoc-openapi
+    implementation(libs.springdoc.openapi.starter.webmvc.api)
 }
 
 kotlin {

@@ -1,8 +1,8 @@
 plugins {
-    id("org.springframework.boot") version "3.2.1"
-    id("io.spring.dependency-management") version "1.1.3"
+    alias(libs.plugins.springframework.boot)
+    alias(libs.plugins.spring.dependency.management)
     kotlin("jvm")
-    kotlin("plugin.spring") version "1.9.22"
+    alias(libs.plugins.spring)
     `mycrmservice-detekt`
 }
 
@@ -11,17 +11,15 @@ repositories {
 }
 
 dependencies {
-    // spring boot
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("org.springframework.boot:spring-boot-starter-aop")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-
-    // spring boot test
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // Spring Boot
+    implementation(libs.spring.boot.starter.oauth2.client)
+    implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.boot.starter.webflux)
+    implementation(libs.spring.boot.starter.aop)
+    implementation(libs.spring.boot.starter.validation)
+    implementation(libs.jackson.module.kotlin)
+    developmentOnly(libs.spring.boot.devtools)
+    testImplementation(libs.spring.boot.starter.test)
 }
 
 kotlin {

@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm")
-    kotlin("plugin.serialization") version "1.9.0"
-    id("io.ktor.plugin") version "2.3.8"
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ktor)
     `mycrmservice-detekt`
 }
 
@@ -18,28 +18,32 @@ val logbackVersion = "1.4.14"
 
 dependencies {
     // ktor server
-    implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-netty-jvm")
-    implementation("io.ktor:ktor-server-content-negotiation")
-    implementation("io.ktor:ktor-serialization-kotlinx-json")
-    implementation("io.ktor:ktor-server-sessions-jvm")
-    implementation("io.ktor:ktor-server-freemarker")
-    implementation("io.ktor:ktor-server-freemarker-jvm")
-    implementation("io.ktor:ktor-server-auth")
-    implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation(libs.ktor.server.core.jvm)
+    implementation(libs.ktor.server.netty.jvm)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.server.sessions.jvm)
+    implementation(libs.ktor.server.freemarker)
+    implementation(libs.ktor.server.freemarker.jvm)
+    implementation(libs.ktor.server.auth)
 
-    // ktor client
-    implementation("io.ktor:ktor-client-core")
-    implementation("io.ktor:ktor-client-cio")
-    implementation("io.ktor:ktor-client-content-negotiation")
+    // Logback
+    implementation(libs.logback.classic)
 
-    // webauthn
-    implementation("com.webauthn4j:webauthn4j-core:0.21.7.RELEASE")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.3")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.15.3")
+    // Ktor Client
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.content.negotiation)
+
+    // WebAuthn4J
+    implementation(libs.webauthn4j.core)
+
+    // Jackson
+    implementation(libs.jackson.databind)
+    implementation(libs.jackson.dataformat.cbor)
 
     // myoidcprovider
-    implementation("myoidcprovider:ktor:0.0.1")
+    implementation(libs.myoidcprovider.ktor)
 }
 
 kotlin {

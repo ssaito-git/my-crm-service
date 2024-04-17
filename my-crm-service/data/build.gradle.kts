@@ -3,17 +3,15 @@ import org.flywaydb.gradle.task.FlywayMigrateTask
 plugins {
     kotlin("jvm")
     `java-library`
-//    id("org.springframework.boot") version "3.2.1"
-//    id("io.spring.dependency-management") version "1.1.3"
-    id("org.flywaydb.flyway") version "10.6.0"
-    id("org.jooq.jooq-codegen-gradle") version "3.19.3"
+    alias(libs.plugins.flyway)
+    alias(libs.plugins.jooq.codegen.gradle)
     `mycrmservice-detekt`
 }
 
 buildscript {
     dependencies {
-        classpath("org.postgresql:postgresql:42.7.1")
-        classpath("org.flywaydb:flyway-database-postgresql:10.6.0")
+        classpath(libs.postgresql)
+        classpath(libs.flyway.database.postgresql)
     }
 }
 
@@ -23,15 +21,22 @@ repositories {
 
 dependencies {
     implementation(project(":my-crm-service:core"))
-    implementation("org.jooq:jooq:3.19.3")
-    implementation("org.postgresql:postgresql:42.7.1")
-    implementation("org.springframework:spring-context:6.1.3")
+
+    // jOOQ
+    implementation(libs.jooq)
+
+    // PostgreSQL JDBC Driver
+    implementation(libs.postgresql)
+
+    // Spring アノテーションを利用するために追加
+    implementation(libs.spring.context)
 
     // Flyway の Java-based Migrations を利用するために追加
-    testImplementation("org.flywaydb:flyway-core:10.6.0")
+    testImplementation(libs.flyway.core)
 
-    testImplementation(platform("org.junit:junit-bom:5.10.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    // JUnit
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
 }
 
 kotlin {
