@@ -12,15 +12,6 @@ values ('00000001-0000-0000-0000-000000000001', 'localhost', '00000000-0000-0000
        ('00000001-0000-0000-0000-000000000001', '127.0.0.1', '00000000-0000-0000-0000-000000000002', 'secret',
         'http://127.0.0.1:8091/introspection', 'SYSTEM');
 
--- system_users
-insert into system_users(tenant_id, id, name, email, password, role_id)
-values ('00000001-0000-0000-0000-000000000001', '00000002-0000-0000-0000-000000000001', 'alice', 'alice@example.com',
-        '{bcrypt}$2a$10$53ybG3v7qINEI6z8L6pioeXqz1iV1yGJW57pWYPjJ9zhqZgsYvwCu', '00000000-0000-0000-0000-000000000001'),
-       ('00000001-0000-0000-0000-000000000001', '00000002-0000-0000-0000-000000000002', 'bob', 'bob@example.com',
-        '{bcrypt}$2a$10$53ybG3v7qINEI6z8L6pioeXqz1iV1yGJW57pWYPjJ9zhqZgsYvwCu', '00000000-0000-0000-0000-000000000002'),
-       ('00000001-0000-0000-0000-000000000001', '00000002-0000-0000-0000-000000000003', 'carol', 'carol@example.com',
-        '{bcrypt}$2a$10$53ybG3v7qINEI6z8L6pioeXqz1iV1yGJW57pWYPjJ9zhqZgsYvwCu', '00000000-0000-0000-0000-000000000002');
-
 -- roles
 insert into roles(tenant_id, id, name)
 values ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 'admin'),
@@ -35,8 +26,20 @@ values ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-0000000
        ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 'system_user', 'read', true),
        ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 'system_user', 'write', true);
 
+-- system_users
+insert into system_users(tenant_id, id, name, email, password, role_id)
+values ('00000001-0000-0000-0000-000000000001', '00000002-0000-0000-0000-000000000001', 'alice', 'alice@example.com',
+        '{bcrypt}$2a$10$53ybG3v7qINEI6z8L6pioeXqz1iV1yGJW57pWYPjJ9zhqZgsYvwCu', '00000000-0000-0000-0000-000000000001'),
+       ('00000001-0000-0000-0000-000000000001', '00000002-0000-0000-0000-000000000002', 'bob', 'bob@example.com',
+        '{bcrypt}$2a$10$53ybG3v7qINEI6z8L6pioeXqz1iV1yGJW57pWYPjJ9zhqZgsYvwCu', '00000000-0000-0000-0000-000000000002'),
+       ('00000001-0000-0000-0000-000000000001', '00000002-0000-0000-0000-000000000003', 'carol', 'carol@example.com',
+        '{bcrypt}$2a$10$53ybG3v7qINEI6z8L6pioeXqz1iV1yGJW57pWYPjJ9zhqZgsYvwCu', '00000000-0000-0000-0000-000000000002');
+
 -- products
 insert into products(tenant_id, id, sku, name, description, active)
-values ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 'foo', 'foo product', 'foo product', true),
-       ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002', 'bar', 'bar product', 'bar product', true),
-       ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000003', 'baz', 'baz product', 'baz product', true);
+values ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 'foo', 'foo product',
+        'foo product', true),
+       ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002', 'bar', 'bar product',
+        'bar product', true),
+       ('00000001-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000003', 'baz', 'baz product',
+        'baz product', true);
