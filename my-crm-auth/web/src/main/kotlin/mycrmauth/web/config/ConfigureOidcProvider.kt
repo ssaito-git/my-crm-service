@@ -129,6 +129,7 @@ fun Application.configureOidcProvider() {
     val clientConfigStorage = ClientConfigStorageMemory(
         mapOf(
             serviceIssuer to mapOf(
+                // ID プロバイダー
                 "00000000-0000-0000-0000-000000000000" to ClientConfig(
                     "00000000-0000-0000-0000-000000000000",
                     "id provider",
@@ -157,6 +158,7 @@ fun Application.configureOidcProvider() {
                     null,
                     null,
                 ),
+                // リソースサーバー
                 "00000000-0000-0000-0000-000000000002" to ClientConfig(
                     "00000000-0000-0000-0000-000000000002",
                     "resource server",
@@ -173,6 +175,7 @@ fun Application.configureOidcProvider() {
                 ),
             ),
             systemIssuer to mapOf(
+                // ID プロバイダー
                 "00000000-0000-0000-0000-000000000000" to ClientConfig(
                     "00000000-0000-0000-0000-000000000000",
                     "id provider",
@@ -201,6 +204,7 @@ fun Application.configureOidcProvider() {
                     null,
                     null,
                 ),
+                // リソースサーバー
                 "00000000-0000-0000-0000-000000000002" to ClientConfig(
                     "00000000-0000-0000-0000-000000000002",
                     "resource server",
@@ -215,6 +219,7 @@ fun Application.configureOidcProvider() {
                     null,
                     null,
                 ),
+                // 管理ツールの認証で使用するクライアント
                 "00000000-0000-0000-0000-000000000003" to ClientConfig(
                     "00000000-0000-0000-0000-000000000003",
                     "management system",
