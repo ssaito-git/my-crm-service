@@ -1,15 +1,15 @@
 package mycrmservice.webapi.controller.internal.systemuser
 
 import jakarta.validation.constraints.NotBlank
-import mycrmservice.webapi.authorization.Action
-import mycrmservice.webapi.authorization.Actor
-import mycrmservice.webapi.authorization.DecisionFunction
-import mycrmservice.webapi.authorization.DecisionService
-import mycrmservice.webapi.authorization.generate
-import mycrmservice.webapi.web.annnotation.CurrentActor
+import mycrmservice.core.authorization.Action
+import mycrmservice.core.authorization.DecisionService
 import mycrmservice.core.entity.Permission
 import mycrmservice.core.entity.SystemUser
 import mycrmservice.core.repository.SystemUserRepository
+import mycrmservice.webapi.authorization.Actor
+import mycrmservice.webapi.authorization.DecisionFunction
+import mycrmservice.webapi.authorization.generate
+import mycrmservice.webapi.web.annnotation.CurrentActor
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component

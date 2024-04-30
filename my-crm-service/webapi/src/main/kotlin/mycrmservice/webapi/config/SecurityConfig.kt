@@ -1,12 +1,12 @@
 package mycrmservice.webapi.config
 
 import jakarta.servlet.http.HttpServletRequest
-import mycrmservice.webapi.authorization.Action
+import mycrmservice.core.entity.Action
+import mycrmservice.core.entity.Permission
 import mycrmservice.webapi.authorization.Actor
 import mycrmservice.webapi.authorization.DecisionFunction
 import mycrmservice.webapi.authorization.Scope
 import mycrmservice.webapi.authorization.generate
-import mycrmservice.core.entity.Permission
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManagerResolver

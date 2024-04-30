@@ -1,10 +1,10 @@
 package mycrmservice.webapi.controller.open.product
 
+import mycrmservice.core.authorization.Action
+import mycrmservice.core.authorization.DecisionService
 import mycrmservice.core.entity.Product
 import mycrmservice.core.repository.ProductRepository
-import mycrmservice.webapi.authorization.Action
 import mycrmservice.webapi.authorization.Actor
-import mycrmservice.webapi.authorization.DecisionService
 import mycrmservice.webapi.controller.open.product.dto.ProductResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController

@@ -1,7 +1,8 @@
 package mycrmservice.webapi.config
 
+import mycrmservice.core.authorization.DecisionService
 import mycrmservice.webapi.authorization.DecisionFunction
-import mycrmservice.webapi.authorization.DecisionService
+import mycrmservice.webapi.authorization.DecisionServiceImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -18,7 +19,7 @@ class DecisionServiceConfig {
      */
     @Bean
     fun decisionService(decisionFunctions: List<DecisionFunction<*, *, *>>): DecisionService {
-        val decisionService = DecisionService()
+        val decisionService = DecisionServiceImpl()
         for (decisionFunction in decisionFunctions) {
             decisionService.addDecisionFunction(decisionFunction)
         }

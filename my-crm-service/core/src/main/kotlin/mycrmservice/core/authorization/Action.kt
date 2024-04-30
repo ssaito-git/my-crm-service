@@ -1,4 +1,4 @@
-package mycrmservice.webapi.authorization
+package mycrmservice.core.authorization
 
 /**
  * 操作

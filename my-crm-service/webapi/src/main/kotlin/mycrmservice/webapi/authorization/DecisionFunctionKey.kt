@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
  * @param C Resource Type
  */
 data class DecisionFunctionKey<A : Any, B : Any, C : Any>(
-    private val actor: KClass<A>,
-    private val action: KClass<B>,
-    private val resource: KClass<C>,
+    private val actor: KClass<out A>,
+    private val action: KClass<out B>,
+    private val resource: KClass<out C>,
 )

@@ -1,5 +1,6 @@
 package mycrmservice.webapi.authorization
 
+import mycrmservice.core.authorization.ActorInterface
 import mycrmservice.core.entity.Permission
 import mycrmservice.core.entity.Role
 import java.util.UUID
@@ -7,7 +8,7 @@ import java.util.UUID
 /**
  * アクター
  */
-sealed interface Actor {
+sealed interface Actor : ActorInterface {
     /**
      * サービスユーザー
      */
