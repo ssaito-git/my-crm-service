@@ -4,8 +4,8 @@ import mycrmservice.core.entity.Product
 import mycrmservice.core.repository.ProductRepository
 import mycrmservice.webapi.authorization.Actor
 import mycrmservice.webapi.controller.open.product.dto.ProductListResponse
-import mycrmservice.webapi.controller.open.product.dto.ProductResponse
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RestController
 
 /**
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 class GetProductListController(
     private val productRepository: ProductRepository,
 ) : GetProductListApi {
+    @Transactional
     override fun getProductList(
         limit: Int,
         offset: Int,
@@ -22,11 +23,8 @@ class GetProductListController(
         actor: Actor,
     ): ResponseEntity<ProductListResponse> {
         val useCase = GetProductList(productRepository)
-        val productList = useCase.get()
-        val products = productList.map {
-            ProductResponse.from(it)
-        }
-        return ResponseEntity.ok(ProductListResponse(products, false))
+        val products = useCase.get()
+        return ResponseEntity.ok(ProductListResponse.from(products, false))
     }
 }
 

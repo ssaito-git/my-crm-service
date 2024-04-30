@@ -55,7 +55,6 @@ interface GetProductListApi {
             ),
         ],
     )
-    @Transactional
     @GetMapping("/products", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getProductList(
         @Parameter(
