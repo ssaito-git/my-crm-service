@@ -1,7 +1,8 @@
 package mycrmservice.webapi.controller.open.product
 
-import mycrmservice.core.entity.Product
+import mycrmservice.core.authorization.DecisionService
 import mycrmservice.core.repository.ProductRepository
+import mycrmservice.core.usecase.GetProductList
 import mycrmservice.webapi.authorization.Actor
 import mycrmservice.webapi.controller.open.product.dto.ProductListResponse
 import org.springframework.http.ResponseEntity
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class GetProductListController(
     private val productRepository: ProductRepository,
+    private val decisionService: DecisionService,
 ) : GetProductListApi {
     @Transactional
     override fun getProductList(
@@ -22,16 +24,8 @@ class GetProductListController(
         active: Boolean,
         actor: Actor,
     ): ResponseEntity<ProductListResponse> {
-        val useCase = GetProductList(productRepository)
-        val products = useCase.get()
+        val useCase = GetProductList(productRepository, decisionService)
+        val products = useCase.get(actor)
         return ResponseEntity.ok(ProductListResponse.from(products, false))
-    }
-}
-
-class GetProductList(
-    private val productRepository: ProductRepository,
-) {
-    fun get(): List<Product> {
-        return productRepository.findAll()
     }
 }

@@ -1,5 +1,7 @@
 package mycrmservice.webapi.authorization
 
+import mycrmservice.core.authorization.Action
+
 /**
  * スコープ
  */
