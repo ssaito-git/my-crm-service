@@ -28,8 +28,6 @@ class CustomAuthorizationRequestResolver(
             return null
         }
 
-        // TODO: リクエストをもとに登録されたクライアントの ID を取得する
-
         CustomHttpSessionRequestCache().saveRequest(request)
 
         return resolve(request, "127.0.0.1")
