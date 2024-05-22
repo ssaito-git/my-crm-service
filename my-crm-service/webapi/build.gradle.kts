@@ -26,12 +26,16 @@ dependencies {
 
     // Jackson
     implementation(libs.jackson.module.kotlin)
+    implementation(libs.jackson.databind.nullable)
 
     // Nimbus
     runtimeOnly(libs.oauth2.oidc.sdk)
 
     // jOOQ
     implementation(libs.jooq)
+
+    // PostgreSQL JDBC Driver
+    runtimeOnly(libs.postgresql)
 
     // Springdoc-openapi
     implementation(libs.springdoc.openapi.starter.webmvc.api)
