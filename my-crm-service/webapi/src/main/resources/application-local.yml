@@ -1,0 +1,8 @@
+server:
+  port: 8090
+
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/crm_service"
+    username: "crm_service_user"
+    password: "secret"
