@@ -14,7 +14,6 @@ import mycrmservice.webapi.web.annnotation.CurrentActor
 import org.hibernate.validator.constraints.Range
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 
