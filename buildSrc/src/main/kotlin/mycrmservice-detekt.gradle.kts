@@ -3,7 +3,8 @@ plugins {
 }
 
 detekt {
-    config.setFrom("$rootDir/config/detekt.yml")
+    config.setFrom("$rootDir/config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
 }
 
 dependencies {

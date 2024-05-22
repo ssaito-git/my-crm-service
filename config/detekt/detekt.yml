@@ -1,3 +1,8 @@
+naming:
+  ClassNaming:
+    excludes:
+      - "**/test/**"
+
 comments:
   UndocumentedPublicClass:
     active: true
@@ -6,10 +11,15 @@ comments:
   UndocumentedPublicProperty:
     active: true
 
+style:
+  ReturnCount:
+    max: 5
+  UtilityClassWithPublicConstructor:
+    excludes:
+      - "**/test/**"
+
 formatting:
   TrailingCommaOnCallSite:
     active: true
-    autoCorrect: true
   TrailingCommaOnDeclarationSite:
     active: true
-    autoCorrect: true
