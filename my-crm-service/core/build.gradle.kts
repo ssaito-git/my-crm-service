@@ -8,6 +8,8 @@ repositories {
 }
 
 dependencies {
+    // kotlin-result
+    api(libs.kotlin.result)
 }
 
 kotlin {

@@ -2,13 +2,14 @@ package mycrmservice.webapi.controller.internal.systemuser
 
 import jakarta.validation.constraints.NotBlank
 import mycrmservice.core.authorization.Action
-import mycrmservice.core.authorization.DecisionService
+import mycrmservice.core.authorization.Authorizer
+import mycrmservice.core.authorization.allow
 import mycrmservice.core.entity.Permission
 import mycrmservice.core.entity.SystemUser
 import mycrmservice.core.repository.SystemUserRepository
 import mycrmservice.webapi.authorization.Actor
 import mycrmservice.webapi.authorization.DecisionFunction
-import mycrmservice.webapi.authorization.generate
+import mycrmservice.webapi.authorization.generateKey
 import mycrmservice.webapi.web.annnotation.CurrentActor
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController
 class SystemUserAuthenticationController(
     private val systemUserRepository: SystemUserRepository,
     private val passwordEncoder: PasswordEncoder,
-    private val decisionService: DecisionService,
+    private val authorizer: Authorizer,
 ) {
     /**
      * 認証
@@ -48,7 +49,7 @@ class SystemUserAuthenticationController(
         val useCase = SystemUserPasswordAuthentication(
             systemUserRepository,
             passwordEncoder,
-            decisionService,
+            authorizer,
         )
         val authenticatedSystemUser = useCase.authenticate(actor, request)
 
@@ -93,7 +94,7 @@ class SystemUserAuthenticationController(
 class SystemUserPasswordAuthentication(
     private val systemUserRepository: SystemUserRepository,
     private val passwordEncoder: PasswordEncoder,
-    private val decisionService: DecisionService,
+    private val decisionService: Authorizer,
 ) {
     /**
      * 認証
@@ -136,7 +137,7 @@ class SystemUserPasswordAuthentication(
  * システムユーザー読み取りの認可判定
  */
 @Component
-class SystemUserReadDecisionFunction : DecisionFunction<Actor, Action.Read, SystemUser> {
+class SystemUserReadDecisionFunction : DecisionFunction<Action.Read, SystemUser> {
     override fun allow(actor: Actor, action: Action.Read, resource: SystemUser): Boolean {
         return when (actor) {
             is Actor.ServiceApplication, is Actor.ServiceUser -> false
@@ -145,5 +146,5 @@ class SystemUserReadDecisionFunction : DecisionFunction<Actor, Action.Read, Syst
         }
     }
 
-    override fun key() = this.generate()
+    override fun key() = this.generateKey()
 }

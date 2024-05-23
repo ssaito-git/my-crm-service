@@ -1,13 +1,16 @@
 package mycrmservice.webapi.controller.open.product
 
-import mycrmservice.core.authorization.DecisionService
+import com.github.michaelbull.result.getOrThrow
+import mycrmservice.core.authorization.Authorizer
 import mycrmservice.core.repository.ProductRepository
-import mycrmservice.core.usecase.GetProductList
+import mycrmservice.core.usecase.product.GetProductList
 import mycrmservice.webapi.authorization.Actor
 import mycrmservice.webapi.controller.open.product.dto.ProductListResponse
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.server.ResponseStatusException
 
 /**
  * プロダクトリスト取得コントローラー
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class GetProductListController(
     private val productRepository: ProductRepository,
-    private val decisionService: DecisionService,
+    private val authorizer: Authorizer,
 ) : GetProductListApi {
     @Transactional
     override fun getProductList(
@@ -24,8 +27,14 @@ class GetProductListController(
         active: Boolean,
         actor: Actor,
     ): ResponseEntity<ProductListResponse> {
-        val useCase = GetProductList(productRepository, decisionService)
+        val useCase = GetProductList(productRepository, authorizer)
         val products = useCase.get(actor)
+            .getOrThrow {
+                when (it) {
+                    GetProductList.Unauthorized -> ResponseStatusException(HttpStatus.UNAUTHORIZED)
+                }
+            }
+
         return ResponseEntity.ok(ProductListResponse.from(products, false))
     }
 }

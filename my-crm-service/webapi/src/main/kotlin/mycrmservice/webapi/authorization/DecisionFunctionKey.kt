@@ -1,16 +1,11 @@
 package mycrmservice.webapi.authorization
 
-import kotlin.reflect.KClass
+import kotlin.reflect.KType
 
 /**
- * Decision function key
- *
- * @param A Actor Type
- * @param B Action Type
- * @param C Resource Type
+ * 認可判定ファンクションキー
  */
-data class DecisionFunctionKey<A : Any, B : Any, C : Any>(
-    private val actor: KClass<out A>,
-    private val action: KClass<out B>,
-    private val resource: KClass<out C>,
+data class DecisionFunctionKey(
+    private val action: KType,
+    private val resource: KType,
 )

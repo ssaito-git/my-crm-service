@@ -1,7 +1,8 @@
 package mycrmservice.webapi.controller.open.product
 
 import mycrmservice.core.authorization.Action
-import mycrmservice.core.authorization.DecisionService
+import mycrmservice.core.authorization.Authorizer
+import mycrmservice.core.authorization.allow
 import mycrmservice.core.entity.Product
 import mycrmservice.core.repository.ProductRepository
 import mycrmservice.webapi.authorization.Actor
@@ -22,13 +23,13 @@ class GetProductController : GetProductApi {
 
 class GetProduct(
     private val productRepository: ProductRepository,
-    private val decisionService: DecisionService,
+    private val authorizer: Authorizer,
 ) {
     fun get(actor: Actor, id: UUID): Product? {
         val product = productRepository.findById(id)
             ?: return null
 
-        if (!decisionService.allow(actor, Action.Read, product)) {
+        if (!authorizer.allow(actor, Action.Read, product)) {
             return null
         }
 

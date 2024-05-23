@@ -1,8 +1,8 @@
 package mycrmservice.webapi.config
 
-import mycrmservice.core.authorization.DecisionService
+import mycrmservice.core.authorization.Authorizer
+import mycrmservice.webapi.authorization.AuthorizerImpl
 import mycrmservice.webapi.authorization.DecisionFunction
-import mycrmservice.webapi.authorization.DecisionServiceImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration
  * 認可判定サービスのコンフィグ
  */
 @Configuration
-class DecisionServiceConfig {
+class AuthorizerConfig {
     /**
      * 認可判定サービスを作成する。
      *
@@ -18,11 +18,11 @@ class DecisionServiceConfig {
      * @return 認可判定サービス
      */
     @Bean
-    fun decisionService(decisionFunctions: List<DecisionFunction<*, *, *>>): DecisionService {
-        val decisionService = DecisionServiceImpl()
+    fun authorizer(decisionFunctions: List<DecisionFunction<*, *>>): Authorizer {
+        val authorizer = AuthorizerImpl()
         for (decisionFunction in decisionFunctions) {
-            decisionService.addDecisionFunction(decisionFunction)
+            authorizer.add(decisionFunction)
         }
-        return decisionService
+        return authorizer
     }
 }

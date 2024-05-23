@@ -1,12 +1,12 @@
 package mycrmservice.webapi.config
 
 import jakarta.servlet.http.HttpServletRequest
-import mycrmservice.core.entity.Action
+import mycrmservice.core.authorization.Action
 import mycrmservice.core.entity.Permission
 import mycrmservice.webapi.authorization.Actor
 import mycrmservice.webapi.authorization.DecisionFunction
 import mycrmservice.webapi.authorization.Scope
-import mycrmservice.webapi.authorization.generate
+import mycrmservice.webapi.authorization.generateKey
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManagerResolver
@@ -73,7 +73,7 @@ data class User(
  * ユーザー読み取りの認可判定
  */
 @Component
-class UserReadDecisionFunction : DecisionFunction<Actor, Action.Read, User> {
+class UserReadDecisionFunction : DecisionFunction<Action.Read, User> {
     override fun allow(actor: Actor, action: Action.Read, resource: User): Boolean {
         return when (actor) {
             is Actor.ServiceApplication -> actor.scopes.contains(Scope.USER_READ)
@@ -83,5 +83,5 @@ class UserReadDecisionFunction : DecisionFunction<Actor, Action.Read, User> {
         }
     }
 
-    override fun key() = this.generate()
+    override fun key() = this.generateKey()
 }
