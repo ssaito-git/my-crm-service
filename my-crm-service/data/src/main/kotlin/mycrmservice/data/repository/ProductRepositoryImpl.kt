@@ -23,6 +23,8 @@ open class ProductRepositoryImpl(private val context: DSLContext) : ProductRepos
                     it.name,
                     it.description,
                     it.active,
+                    it.created,
+                    it.updated,
                 )
             }
     }
@@ -38,6 +40,8 @@ open class ProductRepositoryImpl(private val context: DSLContext) : ProductRepos
                     it.name,
                     it.description,
                     it.active,
+                    it.created,
+                    it.updated,
                 )
             }
     }
@@ -52,6 +56,8 @@ open class ProductRepositoryImpl(private val context: DSLContext) : ProductRepos
                     it.name,
                     it.description,
                     it.active,
+                    it.created,
+                    it.updated,
                 )
             }
     }

@@ -127,6 +127,8 @@ create table crm_service_schema.products
     name        varchar(100) not null,
     description varchar(500) not null,
     active      boolean      not null,
+    created     timestamptz  not null,
+    updated     timestamptz  not null,
     created_at  timestamptz  not null default clock_timestamp(),
     updated_at  timestamptz  not null default clock_timestamp(),
     primary key (tenant_id, id),

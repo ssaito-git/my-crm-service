@@ -30,7 +30,7 @@ data class ProductListResponse(
         fun from(products: List<Product>, hasMore: Boolean): ProductListResponse {
             return ProductListResponse(
                 products.map {
-                    ProductResponse.from(it)
+                    ProductResponse.of(it)
                 },
                 hasMore,
             )
