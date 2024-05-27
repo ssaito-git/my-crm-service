@@ -1,38 +1,45 @@
 package mycrmservice.webapi.controller.open.product
 
-import mycrmservice.core.authorization.Action
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.andThen
+import com.github.michaelbull.result.getOrThrow
 import mycrmservice.core.authorization.Authorizer
-import mycrmservice.core.authorization.allow
-import mycrmservice.core.entity.Product
 import mycrmservice.core.repository.ProductRepository
+import mycrmservice.core.usecase.product.GetProduct
 import mycrmservice.webapi.authorization.Actor
 import mycrmservice.webapi.controller.open.product.dto.ProductResponse
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.server.ResponseStatusException
 import java.util.UUID
 
 /**
  * プロダクト取得コントローラー
  */
 @RestController
-class GetProductController : GetProductApi {
-    override fun getProductById(productId: String, actor: Actor): ResponseEntity<ProductResponse> {
-        TODO("Not yet implemented")
-    }
-}
-
-class GetProduct(
+class GetProductController(
     private val productRepository: ProductRepository,
     private val authorizer: Authorizer,
-) {
-    fun get(actor: Actor, id: UUID): Product? {
-        val product = productRepository.findById(id)
-            ?: return null
+) : GetProductApi {
+    @Transactional
+    override fun getProductById(productId: UUID, actor: Actor): ResponseEntity<ProductResponse> {
+        return GetProduct(productRepository, authorizer)
+            .getProductById(productId, actor)
+            .andThen {
+                Ok(ResponseEntity.ok(ProductResponse.of(it)))
+            }
+            .getOrThrow {
+                when (it) {
+                    GetProduct.NotFound -> {
+                        ResponseStatusException(HttpStatus.NOT_FOUND)
+                    }
 
-        if (!authorizer.allow(actor, Action.Read, product)) {
-            return null
-        }
-
-        return product
+                    GetProduct.Unauthorized -> {
+                        ResponseStatusException(HttpStatus.FORBIDDEN)
+                    }
+                }
+            }
     }
 }

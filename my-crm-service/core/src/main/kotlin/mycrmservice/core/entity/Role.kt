@@ -109,6 +109,8 @@ enum class Permission(
     PAYMENT_WRITE("payment", Action.Write),
     SYSTEM_USER_READ("system_user", Action.Read),
     SYSTEM_USER_WRITE("system_user", Action.Write),
+    PRODUCT_READ("product", Action.Read),
+    PRODUCT_WRITE("product", Action.Write),
     TENANT_READ("tenant", Action.Read),
     TENANT_WRITE("tenant", Action.Write),
 }

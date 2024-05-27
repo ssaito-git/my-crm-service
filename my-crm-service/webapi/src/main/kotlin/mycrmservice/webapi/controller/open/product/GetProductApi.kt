@@ -14,6 +14,7 @@ import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import java.util.UUID
 
 /**
  * プロダクト取得 API
@@ -52,7 +53,7 @@ interface GetProductApi {
     )
     @GetMapping("/products/{productId}", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getProductById(
-        @Parameter(description = "Product ID", required = true) @PathVariable productId: String,
+        @Parameter(description = "Product ID", required = true) @PathVariable productId: UUID,
         @CurrentActor actor: Actor,
     ): ResponseEntity<ProductResponse>
 }

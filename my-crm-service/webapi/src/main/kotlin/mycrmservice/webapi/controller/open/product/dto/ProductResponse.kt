@@ -44,7 +44,6 @@ data class ProductResponse(
      */
     @Schema(required = true, description = "プロダクトの更新日時（Unix time）ミリ秒")
     val updated: Long,
-
 ) {
     companion object {
         /**
