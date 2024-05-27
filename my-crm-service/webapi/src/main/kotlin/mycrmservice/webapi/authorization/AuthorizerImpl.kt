@@ -18,7 +18,11 @@ class AuthorizerImpl : Authorizer {
         resource: Any,
         resourceType: KType,
     ): Boolean {
-        TODO("Not yet implemented")
+        return if (actor is Actor) {
+            decisionFunctionMap[DecisionFunctionKey(actionType, resourceType)]?.allow(actor, action, resource) ?: false
+        } else {
+            false
+        }
     }
 
     /**
