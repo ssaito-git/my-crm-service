@@ -10,6 +10,9 @@ repositories {
 dependencies {
     // kotlin-result
     api(libs.kotlin.result)
+
+    // java-uuid-generator
+    implementation(libs.java.uuid.generator)
 }
 
 kotlin {

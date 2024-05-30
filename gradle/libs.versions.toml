@@ -78,6 +78,9 @@ testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
 # my-oidc-provider
 myoidcprovider-ktor = { module = "myoidcprovider:ktor", version = "0.0.1" }
 
+# java-uuid-generator
+java-uuid-generator = { module = "com.fasterxml.uuid:java-uuid-generator", version = "5.0.0" }
+
 [plugins]
 # Spring
 spring = { id = "org.jetbrains.kotlin.plugin.spring", version = "1.9.22" }
