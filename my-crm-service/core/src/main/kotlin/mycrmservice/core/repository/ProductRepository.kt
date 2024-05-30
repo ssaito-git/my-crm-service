@@ -29,4 +29,11 @@ interface ProductRepository {
      * @return プロダクトのリスト
      */
     fun findAll(): List<Product>
+
+    /**
+     * プロダクトを保存する。
+     *
+     * @param product プロダクト
+     */
+    fun save(product: Product)
 }
