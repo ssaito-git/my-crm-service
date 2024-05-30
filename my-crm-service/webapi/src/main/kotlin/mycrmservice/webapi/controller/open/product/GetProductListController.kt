@@ -28,7 +28,7 @@ class GetProductListController(
         actor: Actor,
     ): ResponseEntity<ProductListResponse> {
         val useCase = GetProductList(productRepository, authorizer)
-        val products = useCase.get(actor)
+        val products = useCase.execute(actor)
             .getOrThrow {
                 when (it) {
                     GetProductList.Unauthorized -> ResponseStatusException(HttpStatus.UNAUTHORIZED)

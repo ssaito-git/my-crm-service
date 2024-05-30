@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 import java.util.UUID
+import kotlin.reflect.typeOf
 
 /**
  * プロダクト取得コントローラー
@@ -26,7 +27,7 @@ class GetProductController(
     @Transactional
     override fun getProductById(productId: UUID, actor: Actor): ResponseEntity<ProductResponse> {
         return GetProduct(productRepository, authorizer)
-            .getProductById(productId, actor)
+            .execute(productId, actor)
             .andThen {
                 Ok(ResponseEntity.ok(ProductResponse.of(it)))
             }

@@ -20,7 +20,7 @@ class GetProductList(
     /**
      * プロダクトのリストを取得する
      */
-    fun get(actor: ActorInterface): Result<List<Product>, Error> {
+    fun execute(actor: ActorInterface): Result<List<Product>, Error> {
         val products = productRepository.findAll()
 
         if (!authorizer.allow(actor, Action.Read, products)) {

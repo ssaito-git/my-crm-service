@@ -27,7 +27,7 @@ class GetProduct(
      * @param actor アクター
      * @return 取得に成功した場合は ID が一致するプロダクト。失敗した場合は [Error]。
      */
-    fun getProductById(id: UUID, actor: ActorInterface): Result<Product, Error> {
+    fun execute(id: UUID, actor: ActorInterface): Result<Product, Error> {
         return productRepository.findById(id)
             .toResultOr {
                 NotFound
